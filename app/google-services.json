@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "457021373050",
+    "firebase_url": "https://houserent-42417.firebaseio.com",
+    "project_id": "houserent-42417",
+    "storage_bucket": "houserent-42417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457021373050:android:4af91c0a7538d111",
+        "android_client_info": {
+          "package_name": "ansarker.github.io.houserent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457021373050-79m4uec33hcguf17q1kmgsmlhlfels13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ansarker.github.io.houserent",
+            "certificate_hash": "17bf585b62dbb3b007cc878b2fee127a3be17a85"
+          }
+        },
+        {
+          "client_id": "457021373050-u5m6mpahv2amkrjgr3qbslb381jqk6ob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwKuSLmAEpur-xjDGlIDU4q91tyBXtyL4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457021373050-u5m6mpahv2amkrjgr3qbslb381jqk6ob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

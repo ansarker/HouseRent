@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="colorPrimaryLight">#CFD8DC</color>
+    <color name="colorAccent">#FF9800</color>
+    <color name="colorTextIcons">#3F51B5</color>
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#757575</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorCardView">#FFFFFF</color>
+    <color name="colorUpdate">#5CB85C</color>
+    <color name="colorDelete">#C9302C</color>
+</resources>

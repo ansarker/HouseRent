@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/colorPrimaryLight"
+    android:layout_gravity="center_horizontal"
+    tools:context=".SignupActivity">
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_paomedia_small_n_flat_house"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/username"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextPrimary"
+        android:hint="@string/username"
+        android:drawableStart="@drawable/username" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/email"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextPrimary"
+        android:hint="@string/email"
+        android:drawableStart="@drawable/email"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/password"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextPrimary"
+        android:drawableStart="@drawable/password" />
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/password"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextPrimary"
+        android:drawableStart="@drawable/password"/>
+
+    <Spinner
+        android:id="@+id/spinnerRoles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/roles"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextPrimary">
+    </Spinner>
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:background="@color/colorTextPrimary"
+        android:textColor="@color/colorPrimaryLight"
+        android:textSize="18sp"
+        android:text="@string/sign_up" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_account"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tvSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in_here"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+</LinearLayout>
