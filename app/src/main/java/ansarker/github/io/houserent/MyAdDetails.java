@@ -144,6 +144,7 @@ public class MyAdDetails extends AppCompatActivity {
 
                     rentDatabase.child(selectedKey).updateChildren(rentChildUpdates);
                     new AlertDialog.Builder(MyAdDetails.this).setTitle("Success").setMessage("Updated successfully!").show();
+                    startActivity(new Intent(MyAdDetails.this, MyPosts.class));
                 }
 
                 @Override
