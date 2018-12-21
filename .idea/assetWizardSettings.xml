@@ -77,7 +77,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/home/megan/Downloads/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_search_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/home/megan/Downloads/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_done_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -87,9 +87,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="color" value="0d6aff" />
-                            <entry key="outputName" value="ic_for_rent_signage" />
+                            <entry key="color" value="008624" />
+                            <entry key="outputName" value="ic_done_black_24dp" />
                             <entry key="sourceFile" value="$USER_HOME$/Downloads/for_rent_signage_115661/for_rent_signage.svg" />
                           </map>
                         </option>

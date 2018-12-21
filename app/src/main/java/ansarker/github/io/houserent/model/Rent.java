@@ -12,11 +12,12 @@ public class Rent {
     private String userName;
     private String contact;
     private String date;
+    private String key;
 
     public Rent() {
     }
 
-    public Rent(String title, String location, String address, String fee, String period, String description, int numOfBeds, int numOfBaths, String userName, String contact, String date) {
+    public Rent(String title, String location, String address, String fee, String period, String description, int numOfBeds, int numOfBaths, String userName, String contact, String date, String key) {
         this.title = title;
         this.location = location;
         this.address = address;
@@ -28,6 +29,7 @@ public class Rent {
         this.userName = userName;
         this.contact = contact;
         this.date = date;
+        this.key = key;
     }
 
     public Rent(String title, String fee, String period) {
@@ -122,5 +124,13 @@ public class Rent {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

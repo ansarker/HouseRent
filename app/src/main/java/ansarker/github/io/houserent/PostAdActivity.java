@@ -130,7 +130,7 @@ public class PostAdActivity extends AppCompatActivity {
                     }
 
                     final String id = rentDatabase.push().getKey();
-                    Rent rent = new Rent(adTitle, adLocation, address, rentFee, periodOfTime, description, Integer.parseInt(beds), Integer.parseInt(baths), userName, contactNumber, strDate);
+                    Rent rent = new Rent(adTitle, adLocation, address, rentFee, periodOfTime, description, Integer.parseInt(beds), Integer.parseInt(baths), userName, contactNumber, strDate, id);
                     rentDatabase.child(id).setValue(rent);
                     new AlertDialog.Builder(PostAdActivity.this).setMessage("Your ad has posted!").show();
 //                    Toast.makeText(PostAdActivity.this, "Your ad has posted!", Toast.LENGTH_SHORT).show();

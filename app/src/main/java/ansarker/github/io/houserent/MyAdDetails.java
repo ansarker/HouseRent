@@ -16,8 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,6 +45,8 @@ public class MyAdDetails extends AppCompatActivity {
 
     private DatabaseReference rentDatabase;
 
+    private String selectedKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,6 @@ public class MyAdDetails extends AppCompatActivity {
         btnMyLocation = findViewById(R.id.btnMyLocation);
 
         ivMyPostImage.setImageResource(R.drawable.ic_for_rent_signage);
-
         Bundle bundle = getIntent().getExtras();
 
         String title = bundle.getString("title");
@@ -83,6 +82,7 @@ public class MyAdDetails extends AppCompatActivity {
         int numBaths = bundle.getInt("baths");
         final String contact = bundle.getString("contact");
         String email = bundle.getString("email");
+        selectedKey = bundle.getString("key");
 
         tvMyPostTitle.setText(title);
         tvMyLocation.setText(location);
@@ -133,17 +133,17 @@ public class MyAdDetails extends AppCompatActivity {
                     rentChildUpdates.put("description", tvMyPostDescription.getText().toString().trim());
                     rentChildUpdates.put("fee", tvMyPostHousePrice.getText().toString().trim());
                     rentChildUpdates.put("location", tvMyLocation.getText().toString().trim());
-                    rentChildUpdates.put("numOfBaths", tvMyNumOfBeds.getText().toString().trim());
-                    rentChildUpdates.put("numOfBeds", tvMyNumOfBaths.getText().toString().trim());
-                    rentChildUpdates.put("period", tvMyPostPeriod.getSelectedItem().toString());
+                    rentChildUpdates.put("numOfBaths", Integer.parseInt(tvMyNumOfBeds.getText().toString()));
+                    rentChildUpdates.put("numOfBeds", Integer.parseInt(tvMyNumOfBaths.getText().toString()));
+                    if (tvMyPostPeriod.getSelectedItem().toString().equals("Monthly")) {
+                        rentChildUpdates.put("period", "month");
+                    } else {
+                        rentChildUpdates.put("period", "year");
+                    }
                     rentChildUpdates.put("title", tvMyPostTitle.getText().toString().trim());
 
-                    for (DataSnapshot item: dataSnapshot.getChildren()) {
-//                        new AlertDialog.Builder(MyAdDetails.this).setMessage(item.getKey()).show();
-                    }
-
-//                    rentDatabase.child().updateChildren(rentChildUpdates);
-                    Toast.makeText(MyAdDetails.this, "Information update successfully", Toast.LENGTH_SHORT).show();
+                    rentDatabase.child(selectedKey).updateChildren(rentChildUpdates);
+                    new AlertDialog.Builder(MyAdDetails.this).setTitle("Success").setMessage("Updated successfully!").show();
                 }
 
                 @Override
@@ -151,22 +151,28 @@ public class MyAdDetails extends AppCompatActivity {
 
                 }
             });
-        } else if (item.getItemId() == R.id.menuClearPost) {
+        } else if (item.getItemId() == R.id.menuDeletePost) {
             new AlertDialog.Builder(MyAdDetails.this)
-                    .setTitle("Title")
-                    .setMessage("Do you really want to Delete all posts?")
+                    .setTitle("Warning")
+                    .setMessage("Do you really want to Delete this post?")
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int whichButton) {
 
-                            Query rentsQuery = rentDatabase.orderByChild("userName").equalTo(Availablity.currentUser.getUserName());
+                            Query rentsQuery = rentDatabase.child(selectedKey);
                             rentsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     for (DataSnapshot rentSnapshot: dataSnapshot.getChildren()) {
                                         rentSnapshot.getRef().removeValue();
                                     }
+                                    new AlertDialog.Builder(MyAdDetails.this)
+                                            .setTitle("Success")
+                                            .setMessage("Post has been deleted!")
+                                            .setIcon(R.drawable.ic_done_black_24dp)
+                                            .show();
+                                    startActivity(new Intent(MyAdDetails.this, MyPosts.class));
                                 }
 
                                 @Override

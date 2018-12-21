@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements RentAdapter.ItemC
 
                     rent.add(new Rent(rents.getTitle(), rents.getLocation(), rents.getAddress(),
                             rents.getFee(), rents.getPeriod(), rents.getDescription(), rents.getNumOfBeds(),
-                            rents.getNumOfBaths(), rents.getUserName(), rents.getContact(), rents.getDate()));
+                            rents.getNumOfBaths(), rents.getUserName(), rents.getContact(), rents.getDate(), rents.getKey()));
                 }
                 layoutManager = new LinearLayoutManager(HomeActivity.this);
                 houseAdapter = new RentAdapter(HomeActivity.this, rent);

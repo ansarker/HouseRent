@@ -48,7 +48,6 @@ public class MyPosts extends AppCompatActivity implements  RentAdapter.ItemClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_posts);
 
-
         firebaseHandler = new FirebaseHandler();
         rentDatabase = firebaseHandler.getFirebaseConnection(RENT_TABLE);
         userDatabase = firebaseHandler.getFirebaseConnection(USER_TABLE);
@@ -63,10 +62,9 @@ public class MyPosts extends AppCompatActivity implements  RentAdapter.ItemClick
                 for (DataSnapshot rentSnapshot: dataSnapshot.getChildren()) {
                     Rent rents = rentSnapshot.getValue(Rent.class);
                     if (rents.getUserName().equals(Availablity.currentUser.getUserName())) {
-                        Availablity.getRentKey = rentSnapshot.getKey();
                         rent.add(new Rent(rents.getTitle(), rents.getLocation(), rents.getAddress(),
                                 rents.getFee(), rents.getPeriod(), rents.getDescription(), rents.getNumOfBeds(),
-                                rents.getNumOfBaths(), rents.getUserName(), rents.getContact(), rents.getDate()));
+                                rents.getNumOfBaths(), rents.getUserName(), rents.getContact(), rents.getDate(), rents.getKey()));
                     }
                 }
                 layoutManager = new LinearLayoutManager(MyPosts.this);
@@ -91,8 +89,6 @@ public class MyPosts extends AppCompatActivity implements  RentAdapter.ItemClick
             Bundle bundle = new Bundle();
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // get the key
-
                 bundle.putString("title", rent.get(index).getTitle());
                 bundle.putString("date", rent.get(index).getDate());
                 bundle.putString("location", rent.get(index).getLocation());
@@ -102,6 +98,7 @@ public class MyPosts extends AppCompatActivity implements  RentAdapter.ItemClick
                 bundle.putString("description", rent.get(index).getDescription());
                 bundle.putInt("beds", rent.get(index).getNumOfBeds());
                 bundle.putInt("baths", rent.get(index).getNumOfBaths());
+                bundle.putString("key", rent.get(index).getKey());
 
                 User user = dataSnapshot.child(rent.get(index).getUserName()).getValue(User.class);
 
@@ -111,7 +108,6 @@ public class MyPosts extends AppCompatActivity implements  RentAdapter.ItemClick
 
                 myAdDetailsIntent.putExtras(bundle);
                 startActivity(myAdDetailsIntent);
-//                Toast.makeText(MyPosts.this, rent.get(index).getContact(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -121,8 +117,7 @@ public class MyPosts extends AppCompatActivity implements  RentAdapter.ItemClick
         });
 
         if (this.getApplicationContext() instanceof HomeDetailsActivity) {
-
-        Toast.makeText(getApplicationContext(), "Nothing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Nothing", Toast.LENGTH_SHORT).show();
         }
 
     }
