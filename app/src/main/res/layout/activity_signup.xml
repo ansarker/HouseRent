@@ -17,6 +17,15 @@
         android:src="@drawable/ic_paomedia_small_n_flat_house"
         android:layout_gravity="center_horizontal"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up here"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"/>
+
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
