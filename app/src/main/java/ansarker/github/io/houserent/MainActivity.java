@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                                 User user = new User();
                                 user = dataSnapshot.child(userName).getValue(User.class);
                                 user.setUserName(dataSnapshot.child(userName).getKey());
-                                Availablity.isLoggedIn = true;
                                 if (user.getPassword().equals(password)) {
                                     Toast.makeText(MainActivity.this, "Sign in success", Toast.LENGTH_SHORT).show();
                                     Intent dashboardIntent = new Intent(MainActivity.this, Dashboard.class);

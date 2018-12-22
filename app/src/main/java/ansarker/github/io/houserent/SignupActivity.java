@@ -101,7 +101,6 @@ public class SignupActivity extends AppCompatActivity {
                                 alert.setMessage("Sign up done successfully!");
                                 alert.show();
                                 startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                finish();
                             }
                         }
 

@@ -55,43 +55,45 @@ public class Dashboard extends AppCompatActivity
         tvTotalAds = findViewById(R.id.tvTotalAds);
         tvTotalUsers = findViewById(R.id.tvTotalUsers);
 
-//        if (Availablity.currentUser.getRole().equals("Owner")) {
-//            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//            navigationView.getMenu().findItem(R.id.itemHome).setVisible(false);
-//            navigationView.getMenu().findItem(R.id.itemMyPosts).setVisible(false);
-//        }
+        try {
+            if (Availablity.currentUser.getRole().equals("Renter")) {
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                navigationView.getMenu().findItem(R.id.itemAddRent).setVisible(false);
+                navigationView.getMenu().findItem(R.id.itemMyPosts).setVisible(false);
+            } else if (Availablity.currentUser.getRole().equals("Owner")) {
+                NavigationView navigationView = findViewById(R.id.nav_view);
+                navigationView.getMenu().findItem(R.id.itemAddRent).setVisible(true);
+                navigationView.getMenu().findItem(R.id.itemMyPosts).setVisible(true);
+            }
 
-        if (Availablity.currentUser.getRole().equals("Renter")) {
-            NavigationView navigationView = findViewById(R.id.nav_view);
-            navigationView.getMenu().findItem(R.id.itemAddRent).setVisible(false);
-            navigationView.getMenu().findItem(R.id.itemMyPosts).setVisible(false);
+            AlertDialog.Builder alert = new AlertDialog.Builder(Dashboard.this);
+            alert.setTitle("Welcome");
+            alert.setMessage("" + Availablity.currentUser.getName());
+            alert.show();
+            tvWelcomeUser.setText("Welcome\n" + Availablity.currentUser.getEmail());
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+            View headerView = navigationView.getHeaderView(0);
+            ivHeaderDisplayPicture = headerView.findViewById(R.id.ivHeaderDisplayPicture);
+            tvHeaderUserName = headerView.findViewById(R.id.tvHeaderUserName);
+            tvHeaderEmail = headerView.findViewById(R.id.tvHeaderEmail);
+
+            tvHeaderUserName.setText(Availablity.currentUser.getName());
+            tvHeaderEmail.setText(Availablity.currentUser.getEmail());
+        } catch (NullPointerException ignored) {
+            startActivity(new Intent(Dashboard.this, MainActivity.class));
         }
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(Dashboard.this);
-        alert.setTitle("Welcome");
-        alert.setMessage("" + Availablity.currentUser.getName());
-        alert.show();
-        tvWelcomeUser.setText("Welcome\n" + Availablity.currentUser.getEmail());
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View headerView = navigationView.getHeaderView(0);
-        ivHeaderDisplayPicture = headerView.findViewById(R.id.ivHeaderDisplayPicture);
-        tvHeaderUserName = headerView.findViewById(R.id.tvHeaderUserName);
-        tvHeaderEmail = headerView.findViewById(R.id.tvHeaderEmail);
-
-        tvHeaderUserName.setText(Availablity.currentUser.getName());
-        tvHeaderEmail.setText(Availablity.currentUser.getEmail());
 
         userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -142,6 +144,7 @@ public class Dashboard extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
     }
 
     @Override
@@ -161,8 +164,11 @@ public class Dashboard extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.menuAbout) {
             AlertDialog aboutme = new AlertDialog.Builder(Dashboard.this)
-                    .setTitle("ABOUT ME")
-                    .setMessage("Name: Md Anis Sarker\nID: 1521745\nEmail: shahidsarker95@hotmail.com\nGithub: ansarker")
+                    .setTitle("ABOUT Developer")
+                    .setIcon(android.R.drawable.ic_menu_agenda)
+                    .setMessage("Name: Md Anis Sarker\n" +
+                            "Email: shahidsarker95@hotmail.com\n" +
+                            "Github: ansarker")
                     .show();
             return true;
         }
@@ -189,8 +195,9 @@ public class Dashboard extends AppCompatActivity
             Intent profileIntent = new Intent(Dashboard.this, Profile.class);
             startActivity(profileIntent);
         } else if (id == R.id.itemSignOut) {
-            Availablity.isLoggedIn = false;
-            Intent loginIntent = new Intent(Dashboard.this, MainActivity.class);
+            super.onBackPressed();
+            Intent loginIntent = new Intent(getApplicationContext(), MainActivity.class);
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(loginIntent);
         }
 

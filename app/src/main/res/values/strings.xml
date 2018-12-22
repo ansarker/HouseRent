@@ -40,6 +40,6 @@
     <string name="nav_header_title">Profile Name</string>
     <string name="nav_header_subtitle">email.address@example.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">About</string>
+    <string name="action_settings">About Developer</string>
     <string name="bdt_sign">৳</string>
 </resources>

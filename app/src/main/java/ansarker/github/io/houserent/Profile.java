@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ansarker.github.io.houserent.firebase.FirebaseHandler;
+import ansarker.github.io.houserent.model.User;
 
 public class Profile extends AppCompatActivity {
 
@@ -137,7 +138,11 @@ public class Profile extends AppCompatActivity {
                         userChildUpdates.put("dateOfBirth", tvProfileDateOfBirth.getText().toString().trim());
 
                         userDatabase.child(Availablity.currentUser.getUserName()).updateChildren(userChildUpdates);
-                        Toast.makeText(Profile.this, "Information update successfully", Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(Profile.this)
+                                .setTitle("Success")
+                                .setIcon(R.drawable.ic_done_black_24dp)
+                                .setMessage("Updated successfully!")
+                                .show();
                     }
 
                     @Override
@@ -152,9 +157,9 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(Profile.this)
-                        .setTitle("Title")
+                        .setTitle("Warning")
                         .setMessage("Do you really want to Delete?\n" +
-                                "Remember, Your ads will be also deleted.")
+                                "Your ads will be also deleted.")
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -183,10 +188,15 @@ public class Profile extends AppCompatActivity {
                                         for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
                                             userSnapshot.getRef().removeValue();
                                         }
-                                        Availablity.currentUser.setUserName("");
-
-                                        startActivity(new Intent(Profile.this, MainActivity.class));
-                                        Toast.makeText(Profile.this, "Your account has deleted!", Toast.LENGTH_SHORT).show();
+                                        new AlertDialog.Builder(Profile.this)
+                                                .setTitle("Success")
+                                                .setMessage("Your account has deleted!")
+                                                .show();
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+//                                        startActivity(new Intent(Profile.this, MainActivity.class));
+//                                        Toast.makeText(Profile.this, "Your account has deleted!", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override

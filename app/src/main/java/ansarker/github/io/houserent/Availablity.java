@@ -7,6 +7,4 @@ public class Availablity {
 
     public static User currentUser;
     public static Rent currentRent;
-    public static String getRentKey;
-    public static boolean isLoggedIn;
 }
