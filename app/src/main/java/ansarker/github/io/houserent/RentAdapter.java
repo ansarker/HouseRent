@@ -101,4 +101,10 @@ class RentAdapter extends RecyclerView.Adapter<RentAdapter.ViewHolder> {
         }
         return arr;
     }
+
+    public void setFilter(ArrayList<Rent> rentList) {
+        rent = new ArrayList<>();
+        rent.addAll(rentList);
+        notifyDataSetChanged();
+    }
 }

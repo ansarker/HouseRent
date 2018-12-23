@@ -2,11 +2,17 @@ package ansarker.github.io.houserent;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,10 +24,10 @@ import ansarker.github.io.houserent.firebase.FirebaseHandler;
 import ansarker.github.io.houserent.model.Rent;
 import ansarker.github.io.houserent.model.User;
 
-public class HomeActivity extends AppCompatActivity implements RentAdapter.ItemClicked {
+public class HomeActivity extends AppCompatActivity implements RentAdapter.ItemClicked, SearchView.OnQueryTextListener {
 
     private RecyclerView rvHouses;
-    private RecyclerView.Adapter houseAdapter;
+    private RentAdapter houseAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private ArrayList<Rent> rent;
@@ -69,13 +75,17 @@ public class HomeActivity extends AppCompatActivity implements RentAdapter.ItemC
 
             }
         });
+    }
 
-//        layoutManager = new LinearLayoutManager(HomeActivity.this);
-//        houseAdapter = new RentAdapter(HomeActivity.this, rent);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menusearch, menu);
+        MenuItem item = menu.findItem(R.id.menuSearch);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 
-//        rvHouses.setLayoutManager(layoutManager);
-//        rvHouses.setItemAnimator(new DefaultItemAnimator());
-//        rvHouses.setAdapter(houseAdapter);
+        searchView.setOnQueryTextListener(this);
+        return true;
     }
 
     @Override
@@ -114,5 +124,30 @@ public class HomeActivity extends AppCompatActivity implements RentAdapter.ItemC
         });
 
 //        Toast.makeText(this, "৳ " + rent.get(index).getFee() + " /" + rent.get(index).getPeriod(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<Rent> newList = new ArrayList<>();
+        for (Rent rents: rent) {
+
+            String title = rents.getTitle().toLowerCase();
+            String location = rents.getLocation().toLowerCase();
+            String price = rents.getFee().toLowerCase();
+            String address = rents.getAddress().toLowerCase();
+
+            if (location.contains(newText) || title.contains(newText) ||
+                    price.contains(newText) || address.contains(newText)) {
+                newList.add(rents);
+            }
+        }
+        houseAdapter.setFilter(newList);
+        return true;
     }
 }
