@@ -3,10 +3,18 @@
 This application is an approach which let house owners to make a placement to the internet for their house rent advertisement, let renter those who basically looking for houses can rent a house by finding through this app.
 
 # Screenshots
-
-<img src="/doc/img1.png" alt="phone image" width="200px" />
-<img src="/doc/img2.png" alt="phone image" width="200px" />
-<img src="/doc/img3.png" alt="phone image" width="200px" />
+<table>
+  <tr>
+    <td>Figure 1</td>
+    <td>Figure 2</td>
+    <td>Figure 3</td>
+  </tr>
+  <tr>
+    <td><img src="/doc/img1.png" alt="phone image" width="200px" /></td>
+    <td><img src="/doc/img2.png" alt="phone image" width="200px" /></td>
+    <td><img src="/doc/img3.png" alt="phone image" width="200px" /></td>
+  </tr>
+</table>
 
 # Library Uses
 
